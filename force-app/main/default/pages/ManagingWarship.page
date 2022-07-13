@@ -1,0 +1,67 @@
+<!--
+  @description       : 
+  @author            : Fábio Marques
+  @group             : 
+  @last modified on  : 12-07-2022
+  @last modified by  : Fábio Marques
+-->
+<apex:page standardController="Warship__c" extensions="ManagingWarshipController">
+
+    <apex:form >
+        <apex:outputLabel value="{!warship.Name}" style="font-weight: bold; font-size: large; "/>
+        
+        
+        <!-- Supplies -->
+        <apex:pageMessages id="msgs" />
+        <apex:pageBlock title="Supplies">
+            <apex:pageBlockTable value="{!warship.Warship_Supplies__r}" var="warshipSupply">
+                <apex:column value="{!warshipSupply.Supply_Name__c}"/>  
+                <apex:column value="{!warshipSupply.Quantity__c}"/>
+            </apex:pageBlockTable>           
+            <apex:pageBlockTable value="{!newSupplies}" var="s">
+                <apex:column >
+                    <apex:outputLabel value="Supply Name: " style="font-weight: bold;"/>
+                    <apex:inputField required="true" value="{!s.Supply__c}"/>
+                </apex:column>
+                <apex:column >
+                    <apex:outputLabel value="Quantity: " style="font-weight: bold;"/>
+                    <apex:inputField required="true" value="{!s.Quantity__c}"/>
+                </apex:column>
+            </apex:pageBlockTable> 
+            
+            <apex:commandButton action="{!addSupplies}" value="Add new"/>
+            <apex:commandButton style="float: right;" action="{!saveSupplies}" value="Save all" rerender="msgs" />
+            
+        </apex:pageBlock>
+
+        <!-- Milestones -->
+        <apex:pageBlock title="Milestones">
+            <apex:pageBlockTable value="{!warship.Milestones__r}" var="milestone">
+                <apex:column value="{!milestone.Name}"/>
+                <apex:column value="{!milestone.Due_Date__c}"/>
+                <apex:column value="{!milestone.Status__c}"/>
+            </apex:pageBlockTable>
+            
+            <apex:pageBlockTable value="{!newMilestones}" var="m">
+                <apex:column >
+                    <apex:outputLabel value="Name: " style="font-weight: bold;"/>
+                    <apex:inputField required="true" value="{!m.Name}"/>
+                </apex:column>
+                <apex:column >
+                    <apex:outputLabel value="Due Date: " style="font-weight: bold;"/>
+                    <apex:inputField value="{!m.Due_Date__c}"/>
+                </apex:column>
+                <apex:column >
+                    <apex:outputLabel value="Status: " style="font-weight: bold;"/>
+                    <apex:inputField value="{!m.Status__c}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+            
+            <apex:commandButton action="{!addMilestones}" value="Add new"/>
+            <apex:commandButton style="float: right;" action="{!saveMilestones}" value="Save all"/>
+            
+        </apex:pageBlock>
+  
+    </apex:form>
+
+</apex:page>

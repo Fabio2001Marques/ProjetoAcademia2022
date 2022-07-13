@@ -1,0 +1,15 @@
+<!--
+  @description       : 
+  @author            : Fábio Marques
+  @group             : 
+  @last modified on  : 04-07-2022
+  @last modified by  : Fábio Marques
+-->
+<apex:page >
+    <apex:pageBlock title="User Status">
+        <apex:pageBlockSection >
+            <p>Nome: {! $User.FirstName}</p>
+            <p>Data: {! TODAY()}</p>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

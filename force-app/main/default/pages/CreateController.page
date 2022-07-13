@@ -1,0 +1,16 @@
+<!--
+  @description       : 
+  @author            : Fábio Marques
+  @group             : 
+  @last modified on  : 04-07-2022
+  @last modified by  : Fábio Marques
+-->
+<apex:page standardController="Contact">
+    <apex:pageBlock title="Contact Details">
+        <apex:pageBlockSection >
+            <apex:outputField value="{! Contact.FirstName}"/>
+            <apex:outputField value="{! Contact.LastName}"/>
+            <apex:outputField value="{! Contact.Account.Name}"/>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>
