@@ -2,7 +2,7 @@
   @description       : 
   @author            : Fábio Marques
   @group             : 
-  @last modified on  : 12-07-2022
+  @last modified on  : 14-07-2022
   @last modified by  : Fábio Marques
 -->
 <apex:page standardController="Warship__c" extensions="ManagingWarshipController">
@@ -12,7 +12,6 @@
         
         
         <!-- Supplies -->
-        <apex:pageMessages id="msgs" />
         <apex:pageBlock title="Supplies">
             <apex:pageBlockTable value="{!warship.Warship_Supplies__r}" var="warshipSupply">
                 <apex:column value="{!warshipSupply.Supply_Name__c}"/>  
@@ -23,14 +22,14 @@
                     <apex:outputLabel value="Supply Name: " style="font-weight: bold;"/>
                     <apex:inputField required="true" value="{!s.Supply__c}"/>
                 </apex:column>
-                <apex:column >
+                <apex:column > 
                     <apex:outputLabel value="Quantity: " style="font-weight: bold;"/>
                     <apex:inputField required="true" value="{!s.Quantity__c}"/>
                 </apex:column>
             </apex:pageBlockTable> 
             
             <apex:commandButton action="{!addSupplies}" value="Add new"/>
-            <apex:commandButton style="float: right;" action="{!saveSupplies}" value="Save all" rerender="msgs" />
+            <apex:commandButton style="float: right;" action="{!saveSupplies}" value="Save all" />
             
         </apex:pageBlock>
 

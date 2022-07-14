@@ -2,12 +2,17 @@
  * @description       : 
  * @author            : Fábio Marques
  * @group             : 
- * @last modified on  : 13-07-2022
+ * @last modified on  : 14-07-2022
  * @last modified by  : Fábio Marques
 **/
 @isTest
 public class TestSupplyTrigger {
-
+    @TestSetup
+    static void makeData(){
+        List<Supply__c> s = TestDataFactory.createSupplies(1);
+        s[0].Name = 'Teste8';
+        insert s;
+    }
     @isTest
     static void suppliesTest() {      
 
@@ -24,7 +29,7 @@ public class TestSupplyTrigger {
             s.Unit_Cost__c = i+1;
             supplies.add(s);
         }
-
+        
         try {
             insert supplies; 
             
