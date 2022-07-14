@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Fábio Marques
  * @group             : 
- * @last modified on  : 13-07-2022
+ * @last modified on  : 14-07-2022
  * @last modified by  : Fábio Marques
 **/
 public class TestDataFactory {
@@ -74,38 +74,45 @@ public class TestDataFactory {
         List<Warship__c> warships = createWarship(3);
         insert warships;
         
-        List<Milestone__c> milestones = new List<Milestone__c>();
- 
-        for (Integer i = 0; i < 5; i++) {
-            Milestone__c ms = new Milestone__c();
-            ms.Name = 'Teste 1'+i;
-            ms.Warship__c = warships[0].Id;
-            ms.Status__c = 'On Track';
-            ms.Due_Date__c = System.today().addDays(i+1);
-            milestones.add(ms);
-        }
-        for (Integer i = 0; i < 5; i++) {
-            Milestone__c ms = new Milestone__c();
-            ms.Name = 'Teste 2'+i;
-            ms.Warship__c = warships[1].Id;
-            if(i == 0){
-                ms.Status__c = 'Behind Schedule';
-            }else{
-                ms.Status__c = 'On Track';
-            }
-            ms.Due_Date__c = System.today().addDays(i+1);
-            milestones.add(ms);
-        }
-        for (Integer i = 0; i < 5; i++) {
-            Milestone__c ms = new Milestone__c();
-            ms.Name = 'Teste 2'+i;
-            ms.Warship__c = warships[2].Id;
-            ms.Status__c = 'Behind Schedule';
-            ms.Due_Date__c = System.today().addDays(i+1);
-            milestones.add(ms);
-        }
-        insert milestones;
+        User u = [Select id from User where id= :UserInfo.getUserId()];
 
+        system.runAs(u){
+            PermissionSet ps = [SELECT Id FROM PermissionSet WHERE Name = 'Disable_Validation_Rule'];
+            insert new PermissionSetAssignment(AssigneeId = UserInfo.getUserId(), PermissionSetId = ps.Id);    
+    
+            List<Milestone__c> milestones = new List<Milestone__c>();
+     
+            for (Integer i = 0; i < 5; i++) {
+                Milestone__c ms = new Milestone__c();
+                ms.Name = 'Teste 1'+i;
+                ms.Warship__c = warships[0].Id;
+                ms.Status__c = 'On Track';
+                ms.Due_Date__c = System.today().addDays(i+1);
+                milestones.add(ms);
+            }
+            for (Integer i = 0; i < 5; i++) {
+                Milestone__c ms = new Milestone__c();
+                ms.Name = 'Teste 2'+i;
+                ms.Warship__c = warships[1].Id;
+                if(i == 0){
+                    ms.Status__c = 'Behind Schedule';
+                }else{
+                    ms.Status__c = 'On Track';
+                }
+                ms.Due_Date__c = System.today().addDays(i+1);
+                milestones.add(ms);
+            }
+            for (Integer i = 0; i < 5; i++) {
+                Milestone__c ms = new Milestone__c();
+                ms.Name = 'Teste 2'+i;
+                ms.Warship__c = warships[2].Id;
+                ms.Status__c = 'Behind Schedule';
+                ms.Due_Date__c = System.today().addDays(i+1);
+                milestones.add(ms);
+            }
+            insert milestones;
+        }
+    
     }
 
     public static void createMilestones(Integer nMilestones){
@@ -122,7 +129,6 @@ public class TestDataFactory {
             ms.Due_Date__c = System.today().addDays(i);
             milestones.add(ms);
         }
-
         insert milestones;
     }
 }

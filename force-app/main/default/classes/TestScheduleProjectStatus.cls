@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Fábio Marques
  * @group             : 
- * @last modified on  : 11-07-2022
+ * @last modified on  : 14-07-2022
  * @last modified by  : Fábio Marques
 **/
 @isTest
@@ -10,7 +10,7 @@ public class TestScheduleProjectStatus {
     @TestSetup
     static void makeData(){
         TestDataFactory.createWarshipsWithMilestones();
-    }
+    } 
 
     @isTest
     static void testUpdateProjectStatus() {
