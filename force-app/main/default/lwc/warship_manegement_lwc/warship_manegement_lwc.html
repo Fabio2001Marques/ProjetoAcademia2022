@@ -1,0 +1,28 @@
+<!--
+  @description       : 
+  @author            : Fábio Marques
+  @group             : 
+  @last modified on  : 15-07-2022
+  @last modified by  : Fábio Marques
+-->
+<template>
+    <lightning-card title="Select a Warship to Manage" icon-name="custom:custom54">
+        <lightning-combobox  class="slds-m-around_medium"
+            name="Warship"
+            label="Warship Name"
+            placeholder="Choose Warship"
+            value={value}
+            onchange={handleChange}
+            options={warshipOption}>
+        </lightning-combobox>
+        <p class="slds-m-around_medium">
+            Warship Selected: 
+            <lightning-formatted-text title="Chosen Key" value={selectedValue}></lightning-formatted-text>
+        </p>   
+    </lightning-card>
+    <div class="slds-m-top_medium">
+        <lightning-card>
+            <lightning-datatable key-field="Id" data={supplies.data} columns={columns} hide-checkbox-column="true"></lightning-datatable>
+        </lightning-card>  
+    </div> 
+</template>
