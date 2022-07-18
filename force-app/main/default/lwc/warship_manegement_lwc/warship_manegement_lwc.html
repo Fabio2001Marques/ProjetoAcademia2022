@@ -1,0 +1,62 @@
+<!--
+  @description       : 
+  @author            : Fábio Marques
+  @group             : 
+  @last modified on  : 18-07-2022
+  @last modified by  : Fábio Marques
+-->
+<template>
+    <lightning-card title="Select a Warship to Manage" icon-name="custom:custom54">
+        <lightning-combobox  class="slds-m-around_medium"
+            name="Warship"
+            label="Warship Name"
+            placeholder="Choose Warship"
+            value={value}
+            onchange={handleChange}
+            options={warshipOption}>
+        </lightning-combobox>
+    </lightning-card>
+
+    <div class="slds-m-top_medium">
+        <lightning-card>
+           <lightning-datatable id="dataTable" key-field="Id" data={supplies} columns={supplyColumns} hide-checkbox-column="true"  onrowaction={callRowAction}>></lightning-datatable>
+        </lightning-card> 
+    </div>
+    <div class="slds-m-top_medium">
+        <lightning-card>
+           <lightning-datatable key-field="Id" data={milestones} columns={milestoneColumns} hide-checkbox-column="true"></lightning-datatable>
+        </lightning-card> 
+    </div>
+
+
+    <!--Modal -->
+    <template if:true={showModal}>
+        <div role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+              <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Add Quantity</h1>
+              </div>
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <div class="slds-grid slds-align_absolute-center">
+                  <div class="slds-col ">
+                    <span style="font-weight: bold;">Supply Name: </span> <span>{supplyName}</span>
+                  </div>
+                  <div class="slds-col">
+                    <span style="font-weight: bold;">Quantity: </span><span>{supplyQuantity}</span>
+                  </div>
+                  <div class="slds-col">
+                    <lightning-input type="number" variant = "label-hidden" onchange={handleInputChange} placeholder={supplyAvailableQuantity}></lightning-input>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={toggleModal}>Cancel</button>
+                <button class="slds-button slds-button_brand" onclick={updateQuantity} >Add</button>
+              </div>
+            </div>
+          </div>
+          <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+         
+
+</template>
