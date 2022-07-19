@@ -22,7 +22,8 @@ const SUPPLY_COLUMNS = [
         name: 'Add Quantity',  
         title: 'Add Quantity',  
         disabled: false,  
-        value: 'AddQuantity'
+        value: 'AddQuantity',
+        iconName: 'utility:add'
     }},  
 ];
 
@@ -135,17 +136,20 @@ export default class Warship_manegement_lwc extends LightningElement {
     }  
 
     updateQuantity(event){
-        this.showModal = !this.showModal;
+        
         if ((this.addQuantity <1) || (this.addQuantity > this.addWarSup?.Available_Quantity__c)) {
             alert("Quantity must be between 0 and "+this.addWarSup?.Available_Quantity__c);
+            this.template.querySelector("lightning-input[data-id=inputModal]").value="";
+            this.template.querySelector("lightning-input[data-id=inputModal]").focus();
         }else{
             updateWarSup({ws_Id: this.supplyId, quantity:this.addQuantity})
-            .then((result)=> {this.supplies = result;}).catch((error)=> {this.error = error;});
+            .then((result)=> {this.supplies = result; }).catch((error)=> {this.error = error;});
             const toastEvent = new ShowToastEvent({
                 message:'Record Update successfully',         
                 variant:'success'
             });
             this.dispatchEvent(toastEvent);
+            this.showModal = !this.showModal;
         }
          
     }

@@ -18,20 +18,20 @@
     </lightning-card>
 
     <div class="slds-m-top_medium ">
-      <div class="slds-is-relative" if:true={isLoading}>
-        <lightning-spinner variant="brand" size="medium" alternative-text="loading"></lightning-spinner>
-      </div>
-      <lightning-card>
+      <lightning-card title="Related Supplies" icon-name="custom:custom44">
+        <div class="slds-is-relative" if:true={isLoading}>
+          <lightning-spinner variant="brand" size="medium" alternative-text="loading"></lightning-spinner>
+        </div>
         <div if:true={supplies} class="slds-m-left_medium slds-m-right_medium" style="border:ridge;">
           <lightning-datatable key-field="Id" data={supplies} columns={supplyColumns} hide-checkbox-column="true" onrowaction={callRowAction}>></lightning-datatable>
       </div>
       </lightning-card> 
     </div>
-    <div class="slds-m-top_medium">
-      <div class="slds-is-relative slds-align_absolute-center" if:true={isLoading}>
-        <lightning-spinner variant="brand" size="medium" alternative-text="loading"></lightning-spinner>
-      </div>
-      <lightning-card>
+    <div class="slds-m-top_medium">     
+      <lightning-card title="Related Milestones" icon-name="custom:custom48">
+        <div class="slds-is-relative slds-align_absolute-center" if:true={isLoading}>
+          <lightning-spinner variant="brand" size="medium" alternative-text="loading"></lightning-spinner>
+        </div>
         <div if:true={milestones} class="slds-m-left_medium slds-m-right_medium"  style="border:ridge;">
           <lightning-datatable key-field="Id" data={milestones} columns={milestoneColumns} hide-checkbox-column="true"></lightning-datatable>
         </div>
@@ -55,7 +55,7 @@
                     <span style="font-weight: bold;">Quantity: </span><span>{supplyQuantity}</span>
                   </div>
                   <div class="slds-col">
-                    <lightning-input type="number" variant = "label-hidden" onchange={handleInputChange} placeholder={supplyAvailableQuantity}></lightning-input>
+                    <lightning-input data-id="inputModal" type="number" variant = "label-hidden" onchange={handleInputChange} placeholder={supplyAvailableQuantity}></lightning-input>
                   </div>
                 </div>
               </div>
