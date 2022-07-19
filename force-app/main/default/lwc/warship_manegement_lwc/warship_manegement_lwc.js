@@ -39,6 +39,7 @@ export default class Warship_manegement_lwc extends LightningElement {
     @track value = ''; 
     @track chosenValue = '';
     showModal = false;
+    isLoading = false;
     addQuantity;
     supplyColumns = SUPPLY_COLUMNS;
     milestoneColumns = MILESTONE_COLUMNS;
@@ -71,11 +72,12 @@ export default class Warship_manegement_lwc extends LightningElement {
     handleChange(event) {
         const selectedOption = event.detail.value;
         this.chosenValue = selectedOption;
-        
+        this.isLoading = true;
         getSupplies({wId: this.chosenValue})
             .then((result)=> {
                 this.supplies = result;
                 this.error = undefined;
+                this.isLoading = false;
             })
             .catch((error) =>{
                 this.supplies = undefined;
