@@ -17,7 +17,7 @@ import updateWarSup from '@salesforce/apex/lwc_ManegementWarships.updateWarSup';
 const SUPPLY_COLUMNS = [
     { label: 'Supply Name', fieldName: SUPPLYNAME_FIELD.fieldApiName, type: 'text' },
     { label: 'Supply Quantity', fieldName: SUPPLYQUANTITY_FIELD.fieldApiName, type: 'text' },
-    {type: 'button', typeAttributes: {  
+    {label: 'Actions', type: 'button', typeAttributes: {  
         label: 'Add Quantity',  
         name: 'Add Quantity',  
         title: 'Add Quantity',  
@@ -41,12 +41,18 @@ export default class Warship_manegement_lwc extends LightningElement {
     @track chosenValue = '';
     showModal = false;
     isLoading = false;
+    showComboBox = true;
+
     addQuantity;
     supplyColumns = SUPPLY_COLUMNS;
     milestoneColumns = MILESTONE_COLUMNS;
     supplies;
     milestones;
     updateRecId;
+    
+    toggleComboBox(){
+        this.showComboBox = !this.showComboBox;
+    }
 
     @track availableQuantity;
     addWarSup;

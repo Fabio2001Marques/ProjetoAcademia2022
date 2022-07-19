@@ -7,7 +7,9 @@
 -->
 <template>
     <lightning-card title="Select a Warship to Manage" icon-name="custom:custom54">
-        <lightning-combobox  class="slds-m-around_medium"
+      <lightning-button-icon icon-name="utility:hide" if:true={showComboBox}  slot="actions" variant="brand" class="slds-m-left_xx-small" onclick={toggleComboBox}></lightning-button-icon>
+      <lightning-button-icon icon-name="utility:preview" if:false={showComboBox}  slot="actions" variant="brand" class="slds-m-left_xx-small" onclick={toggleComboBox}></lightning-button-icon>     
+        <lightning-combobox if:true={showComboBox} class="slds-m-around_medium"
             name="Warship"
             label="Warship Name"
             placeholder="Choose Warship"
