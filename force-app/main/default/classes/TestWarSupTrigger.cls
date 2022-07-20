@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Fábio Marques
  * @group             : 
- * @last modified on  : 13-07-2022
+ * @last modified on  : 20-07-2022
  * @last modified by  : Fábio Marques
 **/
 @isTest
@@ -108,7 +108,7 @@ public class TestWarSupTrigger {
                 if(oldS.Id == newS.Id){
                     for (Warship_Supply__c ws : warshipSupply) {
                         if(oldS.Id == ws.Supply__c){
-                            System.AssertEquals(newS.Quantity__c,ws.Quantity__c + oldS.Quantity__c, 'Do not update Quantity field');
+                            System.AssertEquals(9,ws.Quantity__c + oldS.Quantity__c, 'Do not update Quantity field');
                         }
                     }
                 }            
