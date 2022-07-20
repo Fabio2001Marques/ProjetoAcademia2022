@@ -9,7 +9,7 @@
 public class TestCheckDueDate {
     @TestSetup
     static void makeData(){
-        TestDataFactory.createMilestones(3);
+        TestDataFactory.createWarshipsWithMilestones();
     }
 
     @isTest
@@ -26,7 +26,7 @@ public class TestCheckDueDate {
             if((m.Due_Date__c) < System.today()){
                 System.assertEquals('Behind Schedule', m.Status__c, 'Devia ter alterado para Behind Schedule');
             }
-        }
+        } 
 
     }
 
