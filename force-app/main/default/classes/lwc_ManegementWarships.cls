@@ -19,7 +19,7 @@ public with sharing class lwc_ManegementWarships {
                return null;
           }
           return warship[0];
-         
+          
      }
 
     @AuraEnabled

@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Fábio Marques
  * @group             : 
- * @last modified on  : 20-07-2022
+ * @last modified on  : 21-07-2022
  * @last modified by  : Fábio Marques
 **/
 public class TestDataFactory {
@@ -37,6 +37,19 @@ public class TestDataFactory {
         return supplies; 
     }
 
+    public static List<Resource__c> createResources(Integer nResource){
+        List<Resource__c> resources = new List<Resource__c>();
+
+        for (Integer i = 0; i < nResource; i++) {
+            Resource__c r = new Resource__c();
+            r.Name = 'Teste Resource DataFactory'+i;
+            r.Quantity__c = i+10;
+            r.Minimum_Workload__c = 10;
+            resources.add(r);
+        }
+        return resources; 
+    }
+
     public static List<Warship__c> createWarship(Integer nWarships){
         List<Warship__c> warships = new List<Warship__c>();
         Account acc = createAccount();
@@ -49,8 +62,6 @@ public class TestDataFactory {
         }
         return warships;
     }
-
-
 
     public static void createWarSup (Integer newWarSup){
         List<Warship_Supply__c> warshipSuplly = new List<Warship_Supply__c>();
@@ -68,6 +79,23 @@ public class TestDataFactory {
             }
         }      
         insert warshipSuplly; 
+    }
+
+    public static void createWarRes (Integer newWarRes){
+        List<Warship_Resource__c> warshipResource = new List<Warship_Resource__c>();
+        List<Resource__c> resources = createResources(newWarRes);
+        List<Warship__c> warships = [Select id from Warship__c];
+        insert resources;
+        for (Warship__c w : warships) {
+            for (Integer i = 0; i < newWarRes; i++) {
+                Warship_Resource__c warRes = new Warship_Resource__c();
+                warRes.Warship__c = w.Id;
+                warRes.Resoure__c = resources[i].Id;
+                warRes.Quantity__c = i+1;
+                warshipResource.add(warRes);
+            }
+        }      
+        insert warshipResource; 
     }
 
     public static void createWarshipsWithMilestones(){
@@ -116,7 +144,6 @@ public class TestDataFactory {
     }
 
     public static void createMilestones(String w_Id, Integer nMilestones){
- 
         List<Milestone__c> milestones = new List<Milestone__c>();
 
         for (Integer i = 0; i < nMilestones; i++) {

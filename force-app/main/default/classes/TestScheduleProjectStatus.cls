@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Fábio Marques
  * @group             : 
- * @last modified on  : 14-07-2022
+ * @last modified on  : 21-07-2022
  * @last modified by  : Fábio Marques
 **/
 @isTest
@@ -15,7 +15,7 @@ public class TestScheduleProjectStatus {
     @isTest
     static void testUpdateProjectStatus() {
         Test.startTest();
-        alterar_project_status scheduleClass = new alterar_project_status();
+        change_project_status scheduleClass = new change_project_status();
         String chron = '0 0 23 * * ?';        
         System.schedule('Test Sched', chron, scheduleClass);
         Test.stopTest();
