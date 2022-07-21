@@ -23,10 +23,8 @@ public class TestBatchDueDate {
 
         for (Milestone__c m : milestones) {
             if((m.Due_Date__c) < System.today()){
-                System.assertEquals('Behind Schedule', m.Status__c, 'Devia ter alterado para Behind Schedule');
+                System.assertEquals('Behind Schedule', m.Status__c, 'Should have changed it to Behind Schedule');
             }
         } 
-
     }
-
 }

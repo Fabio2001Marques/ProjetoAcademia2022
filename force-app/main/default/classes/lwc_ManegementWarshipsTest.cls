@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Fábio Marques
  * @group             : 
- * @last modified on  : 20-07-2022
+ * @last modified on  : 21-07-2022
  * @last modified by  : Fábio Marques
 **/
 @isTest
@@ -10,11 +10,11 @@ public class lwc_ManegementWarshipsTest {
     @TestSetup
     static void makeData(){
         TestDataFactory.createWarSup(5);
+        TestDataFactory.createWarRes(5);
     } 
 
     @isTest
-    static void testGetWarships(){
-        
+    static void testGetWarships(){     
         Test.startTest();
         List<Warship__c> warships = lwc_ManegementWarships.getWarships();
         Test.stopTest();
@@ -66,6 +66,31 @@ public class lwc_ManegementWarshipsTest {
                 System.assertEquals(warSup[0].Quantity__c + 5, ws.Quantity__c);
             }
         }
+    }
 
+    @isTest
+    static void testGetDataWarship(){
+        List<Warship__c> warship = [SELECT Id, Name, ActiveMilestones__c, Project_Status__c, Weapons_Status__c, Owner.Name, Account__r.Name FROM Warship__c];
+        
+        Test.startTest();
+        Warship__c getWarship = lwc_ManegementWarships.getDataWarship(warship[0].Id); 
+        Warship__c getWarshipNull = lwc_ManegementWarships.getDataWarship('5324632487'); 
+        Test.stopTest();
+
+        System.assertEquals(warship[0], getWarship);
+        System.assertEquals(null, getWarshipNull);
+    }
+
+    @isTest
+    static void testGetResources(){
+        List<Warship_Resource__c> w_Id = [SELECT Id, Resource_Name__c,Warship__c, Quantity__c FROM Warship_Resource__c limit 1];
+
+        Test.startTest();
+        List<Warship_Resource__c> resources = lwc_ManegementWarships.getResources(w_Id[0].Warship__c);
+        List<Warship_Resource__c> resourcesNull = lwc_ManegementWarships.getResources(w_Id[0].Id);   
+        Test.stopTest();
+
+        System.assertEquals(null, resourcesNull);
+        System.assertEquals(5, resources.size());
     }
 }
