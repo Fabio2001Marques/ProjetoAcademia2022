@@ -20,6 +20,45 @@
         </lightning-combobox>
     </lightning-card> 
 
+    <!--Warship Data -->
+    <div if:true={warshipData} class="slds-m-top_medium">
+      <lightning-card title={warshipData.Name} icon-name="custom:custom92">
+          <div class="slds-grid slds-m-left_medium slds-m-top_small slds-text-title_bold">
+            <div class="slds-col slds-size_1-of-12">
+              <span>Active Milestones</span>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+              <span>Weapons Status </span>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+              <span>Project Status </span>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+              <span>Owner Name</span>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+              <span>Empresa</span>
+            </div>
+          </div>
+          <div class="slds-grid slds-m-left_medium">
+            <div class="slds-col slds-size_1-of-12">
+              <span>{warshipData.ActiveMilestones__c}</span>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+              <span>{warshipData.Weapons_Status__c}</span>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+              <span>{warshipData.Project_Status__c}</span>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+              <span>{warshipData.Owner.Name}</span>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+              <span>{warshipData.Account__r.Name}</span>
+            </div>
+        </div>
+      </lightning-card> 
+    </div>
     <!--Relateds Supplies-->
     <div class="slds-m-top_medium ">
       <lightning-card title="Related Supplies" icon-name="custom:custom44">

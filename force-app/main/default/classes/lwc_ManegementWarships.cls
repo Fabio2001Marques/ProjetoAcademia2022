@@ -12,6 +12,17 @@ public with sharing class lwc_ManegementWarships {
     } 
 
     @AuraEnabled
+     public static Warship__c getDataWarship(String wId) {
+          
+          List<Warship__c> warship = [SELECT Id, Name, ActiveMilestones__c, Project_Status__c, Weapons_Status__c, Owner.Name, Account__r.Name FROM Warship__c Where Id = :wId];
+          if(warship.isEmpty()){
+               return null;
+          }
+          return warship[0];
+         
+     }
+
+    @AuraEnabled
     public static List<Warship_Supply__c> getSupllies(String wId) {
      
           List<Warship_Supply__c> supplies = [ SELECT Id, Name, Supply_Name__c, Quantity__c FROM Warship_Supply__c WHERE Ship_supply__c = :wId Order by Supply_Name__c];
