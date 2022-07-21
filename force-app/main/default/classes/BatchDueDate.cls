@@ -9,8 +9,8 @@ public class BatchDueDate implements Database.Batchable<SObject>, Database.State
     private Integer processes = 0;
 
     public Database.QueryLocator start(Database.BatchableContext context){
-        String query = 'SELECT id, Due_Date__c, Status__c FROM Milestone__c Where Status__c != Complete';
-
+        String query = 'SELECT id, Due_Date__c, Status__c FROM Milestone__c Where Status__c != \'Complete\'';
+        System.debug(query);
         return Database.getQueryLocator(query);
     }
 
@@ -20,7 +20,7 @@ public class BatchDueDate implements Database.Batchable<SObject>, Database.State
                 ms.Status__c = 'Behind Schedule';            
             }  
         }
-        update m;
+        update scope;
     }
 
     public void finish(Database.BatchableContext context){
