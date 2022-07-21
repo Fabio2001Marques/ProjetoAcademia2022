@@ -75,7 +75,7 @@ export default class Warship_manegement_lwc extends LightningElement {
     get selectedValue(){
         return this.chosenValue;
     }
-
+ 
     handleChange(event) {
         const selectedOption = event.detail.value;
         this.chosenValue = selectedOption;
