@@ -12,13 +12,13 @@ public with sharing class lwc_ManegementWarships {
     } 
 
     @AuraEnabled
-     public static List<Warship__c> getDataWarship(String wId) {
+     public static Warship__c getDataWarship(String wId) {
           
-          List<Warship__c> warship = [SELECT Id, Name, ActiveMilestones__c, Project_Status__c FROM Warship__c];
+          List<Warship__c> warship = [SELECT Id, Name, ActiveMilestones__c, Project_Status__c, Weapons_Status__c, Owner.Name, Account__r.Name FROM Warship__c Where Id = :wId];
           if(warship.isEmpty()){
                return null;
           }
-          return warship;
+          return warship[0];
          
      }
 

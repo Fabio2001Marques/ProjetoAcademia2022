@@ -10,6 +10,7 @@ import RESOURCENAME_FIELD from '@salesforce/schema/Warship_Resource__c.Resource_
 import RESOURCEQUANTITY_FIELD from '@salesforce/schema/Warship_Resource__c.Quantity__c';
 
 import getWarships from '@salesforce/apex/lwc_ManegementWarships.getWarships';
+import getWarshipsData from '@salesforce/apex/lwc_ManegementWarships.getDataWarship';
 import getSupplies from '@salesforce/apex/lwc_ManegementWarships.getSupllies';
 import getMilestones from '@salesforce/apex/lwc_ManegementWarships.getMilestones';
 import getResources from '@salesforce/apex/lwc_ManegementWarships.getResources';
@@ -55,6 +56,7 @@ export default class Warship_manegement_lwc extends LightningElement {
     supplyColumns = SUPPLY_COLUMNS;
     milestoneColumns = MILESTONE_COLUMNS;
     resourceColumns = RESOURCE_COLUMNS;
+    warshipData;
     supplies;
     milestones;
     resources;
@@ -90,11 +92,22 @@ export default class Warship_manegement_lwc extends LightningElement {
         const selectedOption = event.detail.value;
         this.chosenValue = selectedOption;
         this.isLoading = true;
+
+        getWarshipsData({wId: this.chosenValue})
+            .then((result)=> {
+                this.warshipData = result;
+                this.error = undefined;               
+            })
+            .catch((error) =>{
+                this.warshipData = undefined;
+                this.error = error;
+                console.log(error.body.message);
+            });
+
         getSupplies({wId: this.chosenValue})
             .then((result)=> {
                 this.supplies = result;
                 this.error = undefined;
-                this.isLoading = false;
             })
             .catch((error) =>{
                 this.supplies = undefined;
@@ -103,27 +116,29 @@ export default class Warship_manegement_lwc extends LightningElement {
             });
         
         getMilestones({wId: this.chosenValue})
-        .then((result)=> {
-            this.milestones = result;
-            this.error = undefined;
-        })
-        .catch((error) =>{
-            this.milestones = undefined;
-            this.error = error;
-            console.log(error.body.message);
-        });
+            .then((result)=> {
+                this.milestones = result;
+                this.error = undefined;
+            })
+            .catch((error) =>{
+                this.milestones = undefined;
+                this.error = error;
+                console.log(error.body.message);
+            });
 
         getResources({wId: this.chosenValue})
-        .then((result)=> {
-            this.resources = result;
-            this.error = undefined;
-        })
-        .catch((error) =>{
-            this.resources = undefined;
-            this.error = error;
-            console.log(error.body.message);
-        });
+            .then((result)=> {
+                this.resources = result;
+                this.error = undefined;
+                this.isLoading = false;
+            })
+            .catch((error) =>{
+                this.resources = undefined;
+                this.error = error;
+                console.log(error.body.message);
+            });
     }
+
     toggleModal(){
         this.showModal = !this.showModal;
     }
