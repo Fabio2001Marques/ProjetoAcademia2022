@@ -39,6 +39,16 @@
         </div>
       </lightning-card> 
     </div>
+    <div class="slds-m-top_medium ">
+      <lightning-card title="Related Resources" icon-name="custom:custom103">
+        <div class="slds-is-relative" if:true={isLoading}>
+          <lightning-spinner variant="brand" size="medium" alternative-text="loading"></lightning-spinner>
+        </div>
+        <div if:true={resources} class="slds-m-left_medium slds-m-right_medium" style="border:ridge;">
+          <lightning-datatable key-field="Id" data={resources} columns={resourceColumns} hide-checkbox-column="true" onrowaction={callRowAction}>></lightning-datatable>
+      </div>
+      </lightning-card> 
+    </div>
 
 
     <!--Modal -->

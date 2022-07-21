@@ -54,6 +54,7 @@ export default class Warship_manegement_lwc extends LightningElement {
     addQuantity;
     supplyColumns = SUPPLY_COLUMNS;
     milestoneColumns = MILESTONE_COLUMNS;
+    resourceColumns = RESOURCE_COLUMNS;
     supplies;
     milestones;
     resources;
