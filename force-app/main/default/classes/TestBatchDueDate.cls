@@ -2,11 +2,11 @@
  * @description       : 
  * @author            : Fábio Marques
  * @group             : 
- * @last modified on  : 20-07-2022
+ * @last modified on  : 21-07-2022
  * @last modified by  : Fábio Marques
 **/
 @isTest
-public class TestCheckDueDate {
+public class TestBatchDueDate {
     @TestSetup
     static void makeData(){
         TestDataFactory.createWarshipsWithMilestones();
@@ -15,9 +15,8 @@ public class TestCheckDueDate {
     @isTest
     static void checkStatusMilestone(){
         Test.startTest();
-        check_Due_Date scheduleClass = new check_Due_Date();
-        String chron = '0 0 23 * * ?';        
-        System.schedule('Test Sched', chron, scheduleClass);
+        BatchDueDate batchable = new BatchDueDate();     
+        Database.executeBatch(batchable);
         Test.stopTest();
 
         List<Milestone__c> milestones = [SELECT id, Name,Due_Date__c, Status__c From Milestone__c];
