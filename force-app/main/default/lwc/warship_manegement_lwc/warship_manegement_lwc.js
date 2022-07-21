@@ -6,10 +6,13 @@ import SUPPLYQUANTITY_FIELD from '@salesforce/schema/Warship_Supply__c.Quantity_
 import MILSTONE_NAME_FIELD from '@salesforce/schema/Milestone__c.Name';
 import MILSTONE_DUEDATE_FIELD from '@salesforce/schema/Milestone__c.Due_Date__c';
 import MILSTONE_STATUS_FIELD from '@salesforce/schema/Milestone__c.Status__c';
+import RESOURCENAME_FIELD from '@salesforce/schema/Warship_Resource__c.Resource_Name__c';
+import RESOURCEQUANTITY_FIELD from '@salesforce/schema/Warship_Resource__c.Quantity__c';
 
 import getWarships from '@salesforce/apex/lwc_ManegementWarships.getWarships';
 import getSupplies from '@salesforce/apex/lwc_ManegementWarships.getSupllies';
 import getMilestones from '@salesforce/apex/lwc_ManegementWarships.getMilestones';
+import getResources from '@salesforce/apex/lwc_ManegementWarships.getResources';
 
 import getAddSupply from '@salesforce/apex/lwc_ManegementWarships.getAddSupply';
 import updateWarSup from '@salesforce/apex/lwc_ManegementWarships.updateWarSup';
@@ -33,6 +36,11 @@ const MILESTONE_COLUMNS = [
     { label: 'Status', fieldName: MILSTONE_STATUS_FIELD.fieldApiName, type: 'text' },
 ];
 
+const RESOURCE_COLUMNS = [
+    { label: 'Resource Name', fieldName: RESOURCENAME_FIELD.fieldApiName, type: 'text' },
+    { label: 'Resource Quantity', fieldName: RESOURCEQUANTITY_FIELD.fieldApiName, type: 'text' },
+];
+
 let i=0;
 export default class Warship_manegement_lwc extends LightningElement {
 
@@ -46,8 +54,10 @@ export default class Warship_manegement_lwc extends LightningElement {
     addQuantity;
     supplyColumns = SUPPLY_COLUMNS;
     milestoneColumns = MILESTONE_COLUMNS;
+    resourceColumns = RESOURCE_COLUMNS;
     supplies;
     milestones;
+    resources;
     updateRecId;
     
     toggleComboBox(){
@@ -75,7 +85,7 @@ export default class Warship_manegement_lwc extends LightningElement {
     get selectedValue(){
         return this.chosenValue;
     }
-
+ 
     handleChange(event) {
         const selectedOption = event.detail.value;
         this.chosenValue = selectedOption;
@@ -99,6 +109,17 @@ export default class Warship_manegement_lwc extends LightningElement {
         })
         .catch((error) =>{
             this.milestones = undefined;
+            this.error = error;
+            console.log(error.body.message);
+        });
+
+        getResources({wId: this.chosenValue})
+        .then((result)=> {
+            this.resources = result;
+            this.error = undefined;
+        })
+        .catch((error) =>{
+            this.resources = undefined;
             this.error = error;
             console.log(error.body.message);
         });

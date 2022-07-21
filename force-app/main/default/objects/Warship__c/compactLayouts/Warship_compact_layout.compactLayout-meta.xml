@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Warship_compact_layout</fullName>
+    <fields>Name</fields>
+    <fields>ActiveMilestones__c</fields>
+    <fields>Project_Status__c</fields>
+    <fields>Project_Status_Classification__c</fields>
+    <label>Warship_compact_layout</label>
+</CompactLayout>

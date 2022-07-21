@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>unity_cost_greater_zero</fullName>
+    <active>true</active>
+    <errorConditionFormula>Unit_Cost__c &lt;= 0</errorConditionFormula>
+    <errorDisplayField>Unit_Cost__c</errorDisplayField>
+    <errorMessage>The Unity Cost must be a value greater than zero.</errorMessage>
+</ValidationRule>

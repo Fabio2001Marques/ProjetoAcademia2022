@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>control_Workload</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( RecordType.DeveloperName = &apos;Administration&apos;, Minimum_Workload__c &lt;10)</errorConditionFormula>
+    <errorDisplayField>Minimum_Workload__c</errorDisplayField>
+    <errorMessage>The Aministrator must work at least 10 hours daily.  No coffe breaks!</errorMessage>
+</ValidationRule>

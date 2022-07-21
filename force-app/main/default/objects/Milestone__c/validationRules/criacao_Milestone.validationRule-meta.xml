@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>criacao_Milestone</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(Due_Date__c  &lt;  TODAY(), ISNEW(),  $Permission.Disable_Validation_Rule )</errorConditionFormula>
+    <errorDisplayField>Due_Date__c</errorDisplayField>
+    <errorMessage>A milestone with a date lower than the current date cannot be created.</errorMessage>
+</ValidationRule>

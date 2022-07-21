@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Fábio Marques
  * @group             : 
- * @last modified on  : 20-07-2022
+ * @last modified on  : 21-07-2022
  * @last modified by  : Fábio Marques
 **/
 public with sharing class lwc_ManegementWarships {
@@ -30,6 +30,17 @@ public with sharing class lwc_ManegementWarships {
                return null;
           }
           return milestones;
+         
+     }
+
+     @AuraEnabled
+     public static List<Warship_Resource__c> getResources(String wId) {
+          
+          List<Warship_Resource__c> resources = [SELECT Id, Resource_Name__c, Quantity__c FROM Warship_Resource__c WHERE Warship__c = :wId];
+          if(resources.isEmpty()){
+               return null;
+          }
+          return resources;
          
      }
 
