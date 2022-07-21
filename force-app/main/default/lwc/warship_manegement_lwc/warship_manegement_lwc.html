@@ -6,6 +6,7 @@
   @last modified by  : Fábio Marques
 -->
 <template>
+    <!--Card with ComboBox-->
     <lightning-card title="Select a Warship to Manage" icon-name="custom:custom54">
       <lightning-button-icon icon-name="utility:hide" if:true={showComboBox}  slot="actions" variant="brand" class="slds-m-left_xx-small" onclick={toggleComboBox}></lightning-button-icon>
       <lightning-button-icon icon-name="utility:preview" if:false={showComboBox}  slot="actions" variant="brand" class="slds-m-left_xx-small" onclick={toggleComboBox}></lightning-button-icon>     
@@ -19,6 +20,7 @@
         </lightning-combobox>
     </lightning-card> 
 
+    <!--Relateds Supplies-->
     <div class="slds-m-top_medium ">
       <lightning-card title="Related Supplies" icon-name="custom:custom44">
         <div class="slds-is-relative" if:true={isLoading}>
@@ -29,6 +31,8 @@
       </div>
       </lightning-card> 
     </div>
+
+    <!--Relateds Milestones-->
     <div class="slds-m-top_medium">     
       <lightning-card title="Related Milestones" icon-name="custom:custom48">
         <div class="slds-is-relative slds-align_absolute-center" if:true={isLoading}>
@@ -39,6 +43,8 @@
         </div>
       </lightning-card> 
     </div>
+
+    <!--Relateds Resources-->
     <div class="slds-m-top_medium ">
       <lightning-card title="Related Resources" icon-name="custom:custom103">
         <div class="slds-is-relative" if:true={isLoading}>
@@ -79,6 +85,4 @@
           </div>
           <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
         </template>
-         
-
 </template>

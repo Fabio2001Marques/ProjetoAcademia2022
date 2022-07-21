@@ -37,10 +37,10 @@ public with sharing class lwc_ManegementWarships {
      public static List<Warship_Resource__c> getResources(String wId) {
           
           List<Warship_Resource__c> resources = [SELECT Id, Resource_Name__c, Quantity__c FROM Warship_Resource__c WHERE Warship__c = :wId];
-          if(resources != null){
-               return resources;
+          if(resources.isEmpty()){
+               return null;
           }
-          return null;
+          return resources;
          
      }
 
