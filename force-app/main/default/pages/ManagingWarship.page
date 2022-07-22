@@ -2,7 +2,7 @@
   @description       : 
   @author            : Fábio Marques
   @group             : 
-  @last modified on  : 14-07-2022
+  @last modified on  : 22-07-2022
   @last modified by  : Fábio Marques
 -->
 <apex:page standardController="Warship__c" extensions="ManagingWarshipController">
@@ -26,11 +26,29 @@
                     <apex:outputLabel value="Quantity: " style="font-weight: bold;"/>
                     <apex:inputField required="true" value="{!s.Quantity__c}"/>
                 </apex:column>
-            </apex:pageBlockTable> 
-            
+            </apex:pageBlockTable>         
             <apex:commandButton action="{!addSupplies}" value="Add new"/>
-            <apex:commandButton style="float: right;" action="{!saveSupplies}" value="Save all" />
-            
+            <apex:commandButton style="float: right;" action="{!saveSupplies}" value="Save all" />          
+        </apex:pageBlock>
+
+        <!-- Resources -->
+        <apex:pageBlock title="Resources">
+            <apex:pageBlockTable value="{!warship.WarshipsResources__r}" var="warshipResource">
+                <apex:column value="{!warshipResource.Resource_Name__c}"/>  
+                <apex:column value="{!warshipResource.Quantity__c}"/>
+            </apex:pageBlockTable>           
+            <apex:pageBlockTable value="{!newResources}" var="r">
+                <apex:column >
+                    <apex:outputLabel value="Resource Name: " style="font-weight: bold;"/>
+                    <apex:inputField required="true" value="{!r.Resoure__c}"/>
+                </apex:column>
+                <apex:column > 
+                    <apex:outputLabel value="Quantity: " style="font-weight: bold;"/>
+                    <apex:inputField required="true" value="{!r.Quantity__c}"/>
+                </apex:column>
+            </apex:pageBlockTable>         
+            <apex:commandButton action="{!addResources}" value="Add new"/>
+            <apex:commandButton style="float: right;" action="{!saveResources}" value="Save all" />          
         </apex:pageBlock>
 
         <!-- Milestones -->
