@@ -2,7 +2,7 @@
   @description       : 
   @author            : Fábio Marques
   @group             : 
-  @last modified on  : 21-07-2022
+  @last modified on  : 03-08-2022
   @last modified by  : Fábio Marques
 -->
 <template>
@@ -78,7 +78,7 @@
           <lightning-spinner variant="brand" size="medium" alternative-text="loading"></lightning-spinner>
         </div>
         <div if:true={milestones} class="slds-m-left_medium slds-m-right_medium"  style="border:ridge;">
-          <lightning-datatable key-field="Id" data={milestones} columns={milestoneColumns} hide-checkbox-column="true"></lightning-datatable>
+          <lightning-datatable key-field="Id" data={milestones} columns={milestoneColumns} onrowaction={callRowActionMilestone} hide-checkbox-column="true"></lightning-datatable>
         </div>
       </lightning-card> 
     </div>
@@ -124,4 +124,33 @@
           </div>
           <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
         </template>
+
+    <!--Modal -->
+    <template if:true={showModalMilestone}>
+      <div role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+          <div class="slds-modal__container">
+            <div class="slds-modal__header">
+              <h1 class="slds-modal__title slds-hyphenate">Finish Milestone</h1>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium">
+              <div class="slds-grid slds-align_absolute-center">
+                <div class="slds-col ">
+                  <span style="font-weight: bold;">Milestone Name: </span> <span>{milestoneName}</span>
+                </div>
+                <div class="slds-col">
+                  <span style="font-weight: bold;">Due Date: </span><span>{milestoneDueDate}</span>
+                </div>
+                <div class="slds-col">
+                  <span style="font-weight: bold;">Warship: </span><span>{milestoneWarship}</span>
+                </div>               
+              </div>
+            </div>
+            <div class="slds-modal__footer">
+              <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={toggleModalMilestone}>Cancel</button>
+              <button class="slds-button slds-button_brand" onclick={updateMilestone} >Finish</button>
+            </div>
+          </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+      </template>
 </template>

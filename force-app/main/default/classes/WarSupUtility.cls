@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Fábio Marques
  * @group             : 
- * @last modified on  : 13-07-2022
+ * @last modified on  : 22-07-2022
  * @last modified by  : Fábio Marques
 **/
 public class WarSupUtility {
@@ -11,8 +11,7 @@ public class WarSupUtility {
         
         List<Id> suppliesIdList = new List<Id>();
         Id warshipId = newWarSupplies[0].Ship_supply__c;
-        
-        
+              
         for(Warship_Supply__c newWarSup : newWarSupplies){           
             suppliesIdList.add(newWarSup.Supply__c);
         }
@@ -102,6 +101,7 @@ public class WarSupUtility {
                 for(Warship_Supply__c oldWarSup : oldWarSupplies){ 
                     if(supplies.Id == oldWarSup.Supply__c){
                         supplies.Quantity__c = supplies.Quantity__c + oldWarSup.Quantity__c;
+                        //supplies.Total_Quantity__c = supplies.Total_Quantity__c - oldWarSup.Quantity__c;
                     }       
                 }
             }

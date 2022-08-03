@@ -1,0 +1,24 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access='global'>
+    <aura:attribute name="showModal" type="boolean" default="false" />
+    <lightning:button name="Open confirm dialog" label="Open confirm dialog" onclick="{!c.openConfirmDialog}"/>
+   
+    <aura:if isTrue="{!v.showModal}">
+        <div style="height:640px">
+            <section role="dialog" tabindex="-1" class="slds-modal slds-modal_x-small slds-fade-in-open" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Confirmation</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium slds-p-left_large" id="modal-content-id-1">
+                        <p style='margin-left:18%'>Are you sure you want to perform this action?</p>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning:button class="slds-button slds-button_brand" name='Yes' label='Yes' onclick='{!c.apexcall}'/>
+                        <lightning:button class="slds-button slds-button_brand" name='No' label='No' onclick='{!c.closeModal}'/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>
+</aura:component>
