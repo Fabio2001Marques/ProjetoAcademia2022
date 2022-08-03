@@ -5,6 +5,7 @@ import SUPPLYNAME_FIELD from '@salesforce/schema/Warship_Supply__c.Supply_Name__
 import SUPPLYQUANTITY_FIELD from '@salesforce/schema/Warship_Supply__c.Quantity__c';
 import MILSTONE_NAME_FIELD from '@salesforce/schema/Milestone__c.Name';
 import MILSTONE_DUEDATE_FIELD from '@salesforce/schema/Milestone__c.Due_Date__c';
+import MILSTONE_ENDDATE_FIELD from '@salesforce/schema/Milestone__c.End_Date__c';
 import MILSTONE_STATUS_FIELD from '@salesforce/schema/Milestone__c.Status__c';
 import RESOURCENAME_FIELD from '@salesforce/schema/Warship_Resource__c.Resource_Name__c';
 import RESOURCEQUANTITY_FIELD from '@salesforce/schema/Warship_Resource__c.Quantity__c';
@@ -17,6 +18,9 @@ import getResources from '@salesforce/apex/lwc_ManegementWarships.getResources';
 
 import getAddSupply from '@salesforce/apex/lwc_ManegementWarships.getAddSupply';
 import updateWarSup from '@salesforce/apex/lwc_ManegementWarships.updateWarSup';
+
+import getFinishMilestone from '@salesforce/apex/lwc_ManegementWarships.getFinishMilestone';
+import updateMilestone from '@salesforce/apex/lwc_ManegementWarships.updateMilestone';
 
 const SUPPLY_COLUMNS = [
     { label: 'Supply Name', fieldName: SUPPLYNAME_FIELD.fieldApiName, type: 'text' },
@@ -34,7 +38,16 @@ const SUPPLY_COLUMNS = [
 const MILESTONE_COLUMNS = [
     { label: 'Milestone Name', fieldName: MILSTONE_NAME_FIELD.fieldApiName, type: 'text' },
     { label: 'Due Date', fieldName: MILSTONE_DUEDATE_FIELD.fieldApiName, type: 'date' },
+    { label: 'End Date', fieldName: MILSTONE_ENDDATE_FIELD.fieldApiName, type: 'date' },
     { label: 'Status', fieldName: MILSTONE_STATUS_FIELD.fieldApiName, type: 'text' },
+    {label: 'Actions', type: 'button', typeAttributes: {  
+        label: 'Finish Milestone',  
+        name: 'Finish Milestone',  
+        title: 'Finish Milestone',  
+        disabled: false,  
+        value: 'FinishMilestone',
+        iconName: 'action:goal'
+    }},
 ];
 
 const RESOURCE_COLUMNS = [
@@ -49,6 +62,7 @@ export default class Warship_manegement_lwc extends LightningElement {
     @track value = ''; 
     @track chosenValue = '';
     showModal = false;
+    showModalMilestone = false;
     isLoading = false;
     showComboBox = true;
 
@@ -68,6 +82,7 @@ export default class Warship_manegement_lwc extends LightningElement {
 
     @track availableQuantity;
     addWarSup;
+    finishMilestone;
 
     @wire(getWarships)
     wiredWarships({ error, data }) {
@@ -138,6 +153,21 @@ export default class Warship_manegement_lwc extends LightningElement {
                 console.log(error.body.message);
             });
     }
+    toggleModalMilestone(){
+        this.showModalMilestone = !this.showModalMilestone;
+    }
+    get milestoneId() {
+        return this.finishMilestone?.Id;
+    }
+    get milestoneName() {
+        return this.finishMilestone?.Name;
+    }
+    get milestoneDueDate() {
+        return this.finishMilestone?.Due_Date__c;
+    }
+    get milestoneWarship() {
+        return this.finishMilestone?.Warship__r.Name;
+    }
 
     toggleModal(){
         this.showModal = !this.showModal;
@@ -170,15 +200,13 @@ export default class Warship_manegement_lwc extends LightningElement {
                 console.log(error.body.message);
             });
         }
-
     }
 
     handleInputChange(event){
         this.addQuantity = event.target.value;
     }  
 
-    updateQuantity(event){
-        
+    updateQuantity(event){       
         if ((this.addQuantity <1) || (this.addQuantity > this.addWarSup?.Available_Quantity__c)) {
             alert("Quantity must be between 0 and "+this.addWarSup?.Available_Quantity__c);
             this.template.querySelector("lightning-input[data-id=inputModal]").value="";
@@ -192,8 +220,32 @@ export default class Warship_manegement_lwc extends LightningElement {
             });
             this.dispatchEvent(toastEvent);
             this.showModal = !this.showModal;
-        }
-         
+        }   
+    }
+
+    callRowActionMilestone( event ) {  
+        this.showModalMilestone = !this.showModalMilestone; 
+        const recId =  event.detail.row.Id;   
+        
+        getFinishMilestone({milestone_Id: recId})
+        .then((result)=> {
+            this.finishMilestone= result;
+            this.error = undefined;
+        })
+        .catch((error)=> {
+            this.finishMilestone = undefined;
+            this.error = error;
+            console.log(error.body.message);
+        });
+        
+    }
+
+    updateMilestone(event){      
+        
+        updateMilestone({milestone_Id: this.milestoneId})
+        .then((result)=> {this.milestones = result}).catch((error)=> {this.error = error});
+
+        this.showModalMilestone = !this.showModalMilestone;
     }
 
 }
