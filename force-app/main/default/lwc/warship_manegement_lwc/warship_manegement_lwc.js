@@ -11,6 +11,8 @@ import RESOURCENAME_FIELD from '@salesforce/schema/Warship_Resource__c.Resource_
 import RESOURCEQUANTITY_FIELD from '@salesforce/schema/Warship_Resource__c.Quantity__c';
 
 import getWarships from '@salesforce/apex/lwc_ManegementWarships.getWarships';
+import isGestorStock from '@salesforce/apex/lwc_ManegementWarships.isGestorStock';
+
 import getWarshipsData from '@salesforce/apex/lwc_ManegementWarships.getDataWarship';
 import getSupplies from '@salesforce/apex/lwc_ManegementWarships.getSupllies';
 import getMilestones from '@salesforce/apex/lwc_ManegementWarships.getMilestones';
@@ -21,19 +23,6 @@ import updateWarSup from '@salesforce/apex/lwc_ManegementWarships.updateWarSup';
 
 import getFinishMilestone from '@salesforce/apex/lwc_ManegementWarships.getFinishMilestone';
 import updateMilestone from '@salesforce/apex/lwc_ManegementWarships.updateMilestone';
-
-const SUPPLY_COLUMNS = [
-    { label: 'Supply Name', fieldName: SUPPLYNAME_FIELD.fieldApiName, type: 'text' },
-    { label: 'Supply Quantity', fieldName: SUPPLYQUANTITY_FIELD.fieldApiName, type: 'text' },
-    {label: 'Actions', type: 'button', typeAttributes: {  
-        label: 'Add Quantity',  
-        name: 'Add Quantity',  
-        title: 'Add Quantity',  
-        disabled: false,  
-        value: 'AddQuantity',
-        iconName: 'utility:add'
-    }},  
-];
 
 const MILESTONE_COLUMNS = [
     { label: 'Milestone Name', fieldName: MILSTONE_NAME_FIELD.fieldApiName, type: 'text' },
@@ -65,9 +54,10 @@ export default class Warship_manegement_lwc extends LightningElement {
     showModalMilestone = false;
     isLoading = false;
     showComboBox = true;
+    isGestorStock = false;
 
     addQuantity;
-    supplyColumns = SUPPLY_COLUMNS;
+    supplyColumns ;
     milestoneColumns = MILESTONE_COLUMNS;
     resourceColumns = RESOURCE_COLUMNS;
     warshipData;
@@ -94,6 +84,42 @@ export default class Warship_manegement_lwc extends LightningElement {
         } else if (error) {
             this.error = error;
             this.contacts = undefined;
+        }
+        isGestorStock()
+            .then((result)=> {
+                this.isGestorStock = result;
+                this.error = undefined;               
+            })
+            .catch((error) =>{
+                this.isGestorStock = undefined;
+                this.error = error;
+                console.log(error.body.message);
+            });
+
+        if(this.isGestorStock){         
+            this.supplyColumns = [{ label: 'Supply Name', fieldName: SUPPLYNAME_FIELD.fieldApiName, type: 'text' },
+                { label: 'Supply Quantity', fieldName: SUPPLYQUANTITY_FIELD.fieldApiName, type: 'text' },
+                {label: 'Actions', type: 'button', typeAttributes: {  
+                    label: 'Add Quantity',  
+                    name: 'Add Quantity',  
+                    title: 'Add Quantity',  
+                    disabled: false,  
+                    value: 'AddQuantity',
+                    iconName: 'utility:add'
+                }},  
+                ];
+        }else{
+            this.supplyColumns = [{ label: 'Supply Name', fieldName: SUPPLYNAME_FIELD.fieldApiName, type: 'text' },
+                { label: 'Supply Quantity', fieldName: SUPPLYQUANTITY_FIELD.fieldApiName, type: 'text' },
+                {label: 'Actions', type: 'button', typeAttributes: {  
+                    label: 'Add Quantity',  
+                    name: 'Add Quantity',  
+                    title: 'Add Quantity',  
+                    disabled: true,  
+                    value: 'AddQuantity',
+                    iconName: 'utility:add'
+                }},  
+                ];
         }
     }
     get warshipOption() {
@@ -161,7 +187,7 @@ export default class Warship_manegement_lwc extends LightningElement {
             .then((result)=> {
                 this.resources = result;
                 this.error = undefined;
-                this.isLoading = false;
+                this.isLoading = false; 
             })
             .catch((error) =>{
                 this.resources = undefined;

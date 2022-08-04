@@ -2,7 +2,7 @@
   @description       : 
   @author            : Fábio Marques
   @group             : 
-  @last modified on  : 22-07-2022
+  @last modified on  : 04-08-2022
   @last modified by  : Fábio Marques
 -->
 <apex:page standardController="Warship__c" extensions="ManagingWarshipController">
@@ -13,7 +13,7 @@
         
         <!-- Supplies -->
         <apex:pageBlock title="Supplies">
-            <apex:pageBlockTable value="{!warship.Warship_Supplies__r}" var="warshipSupply">
+            <apex:pageBlockTable value="{!warship.Warship_Supplies__r}" var="warshipSupply" >
                 <apex:column value="{!warshipSupply.Supply_Name__c}"/>  
                 <apex:column value="{!warshipSupply.Quantity__c}"/>
             </apex:pageBlockTable>           
@@ -32,7 +32,7 @@
         </apex:pageBlock>
 
         <!-- Resources -->
-        <apex:pageBlock title="Resources">
+        <apex:pageBlock title="Resources" rendered="{{!$User.ProfileId != '00e7Q000000IavCQAS'}">
             <apex:pageBlockTable value="{!warship.WarshipsResources__r}" var="warshipResource">
                 <apex:column value="{!warshipResource.Resource_Name__c}"/>  
                 <apex:column value="{!warshipResource.Quantity__c}"/>
@@ -52,7 +52,7 @@
         </apex:pageBlock>
 
         <!-- Milestones -->
-        <apex:pageBlock title="Milestones">
+        <apex:pageBlock title="Milestones" rendered="{{!$User.ProfileId != '00e7Q000000IavCQAS'}">
             <apex:pageBlockTable value="{!warship.Milestones__r}" var="milestone">
                 <apex:column value="{!milestone.Name}"/>
                 <apex:column value="{!milestone.Due_Date__c}"/>

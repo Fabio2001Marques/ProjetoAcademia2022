@@ -2,13 +2,23 @@
  * @description       : 
  * @author            : Fábio Marques
  * @group             : 
- * @last modified on  : 03-08-2022
+ * @last modified on  : 04-08-2022
  * @last modified by  : Fábio Marques
 **/
 public with sharing class lwc_ManegementWarships {
     @AuraEnabled(cacheable=true)
     public static List<Warship__c> getWarships() {
        return [SELECT Id, Name FROM Warship__c]; 
+    } 
+
+    @AuraEnabled(cacheable=true)
+    public static boolean isGestorStock() {
+     id id1 = userinfo.getProfileId();
+     Profile p = [select Name from profile where id = :id1];
+     if (p.Name == 'Gestor Stock') {
+          return true;
+     }
+       return false;
     } 
 
     @AuraEnabled

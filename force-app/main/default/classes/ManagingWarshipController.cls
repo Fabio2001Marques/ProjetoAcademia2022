@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Fábio Marques
  * @group             : 
- * @last modified on  : 22-07-2022
+ * @last modified on  : 04-08-2022
  * @last modified by  : Fábio Marques
 **/
 public class ManagingWarshipController{
@@ -14,6 +14,7 @@ public class ManagingWarshipController{
     public List <Milestone__c> newMilestones{ get; set; } 
     public List <Warship_Resource__c> newresources{ get; set; } 
     private Id wId;
+
     
     public ManagingWarshipController(ApexPages.StandardController controller) {
         wId = controller.getId();     
@@ -22,7 +23,7 @@ public class ManagingWarshipController{
     
     public void addSupplies(){
         Warship_Supply__c s = new Warship_Supply__c(Ship_supply__c = warship.Id);
-        newSupplies.add(s);
+        newSupplies.add(s); 
     }
     
     public void saveSupplies(){
