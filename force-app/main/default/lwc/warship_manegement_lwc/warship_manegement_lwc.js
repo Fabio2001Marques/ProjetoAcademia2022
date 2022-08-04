@@ -134,6 +134,22 @@ export default class Warship_manegement_lwc extends LightningElement {
             .then((result)=> {
                 this.milestones = result;
                 this.error = undefined;
+
+                this.milestoneColumns = [
+                    { label: 'Milestone Name', fieldName: MILSTONE_NAME_FIELD.fieldApiName, type: 'text' },
+                    { label: 'Due Date', fieldName: MILSTONE_DUEDATE_FIELD.fieldApiName, type: 'date' },
+                    { label: 'End Date', fieldName: MILSTONE_ENDDATE_FIELD.fieldApiName, type: 'date' },
+                    { label: 'Status', fieldName: MILSTONE_STATUS_FIELD.fieldApiName, type: 'text' },
+                    {label: 'Actions', type: 'button', typeAttributes: {  
+                        label: 'Finish Milestone',  
+                        name: 'Finish Milestone',  
+                        title: 'Finish Milestone',  
+                        disabled: {fieldName: 'isComplete__c'},  
+                        value: 'FinishMilestone',
+                        iconName: 'action:goal'
+                    }},
+                ];
+                this.milestones = this.milestones.map((milestone) => ({ ...milestone, 'isComplete__c': milestone.isComplete__c }));
             })
             .catch((error) =>{
                 this.milestones = undefined;
@@ -152,6 +168,8 @@ export default class Warship_manegement_lwc extends LightningElement {
                 this.error = error;
                 console.log(error.body.message);
             });
+
+        
     }
     toggleModalMilestone(){
         this.showModalMilestone = !this.showModalMilestone;
