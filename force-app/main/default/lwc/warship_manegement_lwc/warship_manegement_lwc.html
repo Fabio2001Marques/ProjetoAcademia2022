@@ -99,32 +99,32 @@
 
     <!--Modal -->
     <template if:true={showModal}>
-        <div role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
-            <div class="slds-modal__container">
-              <div class="slds-modal__header">
-                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Add Quantity</h1>
+      <div role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+          <div class="slds-modal__header">
+            <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Add Quantity</h1>
+          </div>
+          <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <div class="slds-grid slds-align_absolute-center">
+              <div class="slds-col ">
+                <span style="font-weight: bold;">Supply Name: </span> <span>{supplyName}</span>
               </div>
-              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
-                <div class="slds-grid slds-align_absolute-center">
-                  <div class="slds-col ">
-                    <span style="font-weight: bold;">Supply Name: </span> <span>{supplyName}</span>
-                  </div>
-                  <div class="slds-col">
-                    <span style="font-weight: bold;">Quantity: </span><span>{supplyQuantity}</span>
-                  </div>
-                  <div class="slds-col">
-                    <lightning-input data-id="inputModal" type="number" variant = "label-hidden" onchange={handleInputChange} placeholder={supplyAvailableQuantity}></lightning-input>
-                  </div>
-                </div>
+              <div class="slds-col">
+                <span style="font-weight: bold;">Quantity: </span><span>{supplyQuantity}</span>
               </div>
-              <div class="slds-modal__footer">
-                <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={toggleModal}>Cancel</button>
-                <button class="slds-button slds-button_brand" onclick={updateQuantity} >Add</button>
+              <div class="slds-col">
+                <lightning-input data-id="inputModal" type="number" variant = "label-hidden" onchange={handleInputChange} placeholder={supplyAvailableQuantity}></lightning-input>
               </div>
             </div>
           </div>
-          <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
-        </template>
+          <div class="slds-modal__footer">
+            <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={toggleModal}>Cancel</button>
+            <button class="slds-button slds-button_brand" onclick={updateQuantity} >Add</button>
+          </div>
+        </div>
+      </div>
+      <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
 
     <!--Modal -->
     <template if:true={showModalMilestone}>

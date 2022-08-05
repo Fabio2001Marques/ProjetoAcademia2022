@@ -1,0 +1,17 @@
+<!--
+  @description       : 
+  @author            : Fábio Marques
+  @group             : 
+  @last modified on  : 05-08-2022
+  @last modified by  : Fábio Marques
+-->
+<apex:page controller="ControllerListSupply">
+    <apex:pageBlock title="Supply Management">
+        <apex:pageBlockTable value="{!supply}" var="s">
+            <apex:column value="{!s.Name}"/>
+            <apex:column value="{!s.Quantity__c}"/>
+            <apex:column value="{!s.Total_Quantity__c}"/>
+            <apex:column value="{!s.Utilization__c}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page> 
