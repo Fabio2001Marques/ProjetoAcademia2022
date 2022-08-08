@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Fábio Marques
  * @group             : 
- * @last modified on  : 04-08-2022
+ * @last modified on  : 08-08-2022
  * @last modified by  : Fábio Marques
 **/
 public with sharing class lwc_ManegementWarships {
@@ -43,7 +43,7 @@ public with sharing class lwc_ManegementWarships {
 
      @AuraEnabled
      public static List<Milestone__c> getMilestones(String wId) {        
-          List<Milestone__c> milestones = [SELECT id, Name, Due_Date__c,End_Date__c,Status__c  FROM Milestone__c WHERE Warship__c = :wId Order by Due_Date__c];
+          List<Milestone__c> milestones = [SELECT id, Name, Due_Date__c,End_Date__c,Status__c,isComplete__c  FROM Milestone__c WHERE Warship__c = :wId Order by isComplete__c];
           if(milestones.isEmpty()){
                return null;
           }

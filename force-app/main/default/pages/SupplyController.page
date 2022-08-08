@@ -2,16 +2,87 @@
   @description       : 
   @author            : Fábio Marques
   @group             : 
-  @last modified on  : 05-08-2022
+  @last modified on  : 08-08-2022
   @last modified by  : Fábio Marques
 -->
 <apex:page controller="ControllerListSupply">
     <apex:pageBlock title="Supply Management">
+        <apex:form >
         <apex:pageBlockTable value="{!supply}" var="s">
             <apex:column value="{!s.Name}"/>
             <apex:column value="{!s.Quantity__c}"/>
             <apex:column value="{!s.Total_Quantity__c}"/>
             <apex:column value="{!s.Utilization__c}"/>
+            <apex:column >
+                <apex:commandButton value="Add Quantity" action="{!showPopup}" rerender="popup" status="status">
+                    <apex:param value="{!s.id}" assignTo="{!paramValue}"/>
+                </apex:commandButton>
+            </apex:column>
         </apex:pageBlockTable>
+        <apex:pageBlockTable value="{!newSupplies}" var="s">
+            <apex:column >
+                <apex:outputLabel value="Supply Name: " style="font-weight: bold;"/>
+                <apex:inputField required="true" value="{!s.Name}"/>
+            </apex:column>
+            <apex:column > 
+                <apex:outputLabel value="Quantity: " style="font-weight: bold;"/>
+                <apex:inputField required="true" value="{!s.Quantity__c}"/>
+            </apex:column>
+            <apex:column > 
+                <apex:outputLabel value="Unit Cost: " style="font-weight: bold;"/>
+                <apex:inputField required="true" value="{!s.Unit_Cost__c}"/>
+            </apex:column>  
+        </apex:pageBlockTable> 
+        <apex:commandButton action="{!addSupplies}" value="Add new"/>
+        <apex:commandButton style="float: right;" action="{!saveSupplies}" value="Save all" />   
+    </apex:form> 
     </apex:pageBlock>
+    <apex:form >
+<apex:pageBlock >
+    <apex:outputPanel id="popup">
+        <apex:outputPanel id="popInnerOutputPnl" styleClass="customPopup" layout="block" rendered="{!displayPopUp}">    
+            <apex:pageblockSection >                                   
+                <apex:pageblockSectionItem >
+                <apex:outputLabel value="Quantity"></apex:outputLabel>
+                <apex:inputText  styleClass="disabledTextBox"></apex:inputText>
+                </apex:pageblockSectionItem>
+            </apex:pageblockSection>
+            <apex:commandButton value="Add" action="{!redirectPopup}" styleClass="closeButton" rerender="popup">
+                <apex:commandButton value="Cancel" title="Close the popup" action="{!closePopup}" styleClass="closeButton" rerender="popup">
+            </apex:commandButton>
+            </apex:commandButton>
+        </apex:outputPanel>
+    </apex:outputPanel>
+     
+    </apex:pageBlock>
+    
+    </apex:form>
+
+<style type="text/css">
+    .customPopup {
+        background-color: white;
+        border-style: solid;
+        border-width: 2px;
+        left: 85%;
+        padding: 10px;
+        position: absolute;
+        width: 200px;
+        top: 35%;
+    }
+
+    .disabledTextBox {
+        background-color: white;
+        border: 1px solid;
+        color: black;
+        cursor: default;
+        width: 130px;
+        display: table;
+        padding: 2px 1px;
+        text-align:center;
+    }   
+
+    .closeButton {
+        float: right;
+    }
+</style>            
 </apex:page> 

@@ -2,7 +2,7 @@
   @description       : 
   @author            : Fábio Marques
   @group             : 
-  @last modified on  : 04-08-2022
+  @last modified on  : 05-08-2022
   @last modified by  : Fábio Marques
 -->
 <apex:page standardController="Warship__c" extensions="ManagingWarshipController">
@@ -10,7 +10,7 @@
     <apex:form >
         <apex:outputLabel value="{!warship.Name}" style="font-weight: bold; font-size: large; "/>
         
-        
+         
         <!-- Supplies -->
         <apex:pageBlock title="Supplies">
             <apex:pageBlockTable value="{!warship.Warship_Supplies__r}" var="warshipSupply" >
