@@ -1,0 +1,19 @@
+<!--
+  @description       : 
+  @author            : Fábio Marques
+  @group             : 
+  @last modified on  : 05-08-2022
+  @last modified by  : Fábio Marques
+-->
+<apex:page controller="ControllerListWarship">
+    <apex:pageBlock title="Warship State">
+        <apex:form >
+        <apex:pageBlockTable value="{!warship}" var="w">
+            <apex:column value="{!w.Name}"/>
+            <apex:column value="{!w.ActiveMilestones__c}"/>
+            <apex:column value="{!w.Project_Status__c}"/>
+            <apex:column value="{!w.Weapons_Status__c}"/>
+        </apex:pageBlockTable> 
+    </apex:form> 
+    </apex:pageBlock>           
+</apex:page>

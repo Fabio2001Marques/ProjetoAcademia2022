@@ -2,7 +2,7 @@
   @description       : 
   @author            : Fábio Marques
   @group             : 
-  @last modified on  : 08-08-2022
+  @last modified on  : 05-08-2022
   @last modified by  : Fábio Marques
 -->
 <apex:page controller="ControllerListSupply">
@@ -39,12 +39,13 @@
     </apex:pageBlock>
     <apex:form >
 <apex:pageBlock >
+
     <apex:outputPanel id="popup">
         <apex:outputPanel id="popInnerOutputPnl" styleClass="customPopup" layout="block" rendered="{!displayPopUp}">    
             <apex:pageblockSection >                                   
                 <apex:pageblockSectionItem >
                 <apex:outputLabel value="Quantity"></apex:outputLabel>
-                <apex:inputText  styleClass="disabledTextBox"></apex:inputText>
+                <apex:inputText styleClass="disabledTextBox"></apex:inputText>
                 </apex:pageblockSectionItem>
             </apex:pageblockSection>
             <apex:commandButton value="Add" action="{!redirectPopup}" styleClass="closeButton" rerender="popup">
@@ -53,7 +54,7 @@
             </apex:commandButton>
         </apex:outputPanel>
     </apex:outputPanel>
-     
+    
     </apex:pageBlock>
     
     </apex:form>
@@ -85,4 +86,4 @@
         float: right;
     }
 </style>            
-</apex:page> 
+</apex:page>
